@@ -65,13 +65,13 @@ The purple and grey balls are quite self explanatory in documentation above.
 
 The time ball works by reducing the Z velocity of the ball to 75% of its original value.  This allows the player to have more time to get the timing on the main ball correct.
 
-![Dificulty Over Time [Time Bomb]](documentationImagery/Dificulty Over Time [Time Bomb].png)
+![Dificulty Over Time time Bomb](documentationImagery/Dificulty Over Time [Time Bomb].png)
 
 In the **above graph** you can see the the time bomb slows down the rate Z velocity. Unlike in the **graph below** where no time bombs were used, and the game becomes 'impossible' after 40,000ms. 
 
 ***NOTE: Negative values represent when the ball is heading away from player (negative velocity); *** 
 
-![Dificulty Over Time [Time Bomb]](documentationImagery/DifficultNoTimeBomb.png)
+![Dificulty Over Time noTime Bomb](documentationImagery/DifficultNoTimeBomb.png)
 
 These graphs were developed utilizing this piece of code; placed around the `while gameFinished == False:` line of code.
 
