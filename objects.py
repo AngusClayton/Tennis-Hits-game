@@ -39,7 +39,147 @@ class titleScreen(pygame.sprite.Sprite):
             self.kill()
             return True
     
+class deathBall(pygame.sprite.Sprite): #class for the 'grey' ball that end the game upon touch.
+    def changeZ(self,zValue): #changes 'size' / distance away / z value of ball.
+        zposx = int(zValue*self.originalX)
+        zposy = int(zValue*self.originalY)
+        #apply scaling to image
+        self.image = pygame.transform.smoothscale(self.origionalImage,(zposx,zposy))
+        #apply scaling to hitbox
+        self.rect.width = zposx
+        self.rect.height = zposy
+
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.origionalImage = pygame.image.load(os.path.join('img', 'deathBall.png'))
+        self.image = self.origionalImage
+        self.rect = self.image.get_rect()
+         
+        #set origional size for Z axis scaling effect.
+        self.originalX = self.rect.width
+        self.originalY = self.rect.height
+
+        #set direction vectors [random x/y]
+        self.vx = random.randint(-5,5)/10 #velocity X
+        self.vy = random.randint(-5,5)/10 #velocity Y
+        self.vz = 0.005
+
+        #set starting position
+        self.x = screenWidth/2 #position x
+        self.y = screenHeight/2 #position y
+        self.z = 0.1
+        self.rect.center = (self.x,self.y) #start at centre of window.
+
+        #set image to scale:
+        self.changeZ(self.z)
+    def move(self):
+        #change x y z pos 
+        self.y = self.y + self.vy
+        self.x = self.x + self.vx
+        self.z = self.z + self.vz
+        self.rect.center = (self.x,self.y)
+        self.changeZ(self.z)
+
+        #remove the death ball from the screen if z > 1
+        if self.z > 1:
+            self.kill()    
+
+class bonusBall(pygame.sprite.Sprite): #class for the 'purple' ball that give bonus points upon touch.
+    def changeZ(self,zValue): #changes 'size' / distance away / z value of ball.
+        zposx = int(zValue*self.originalX)
+        zposy = int(zValue*self.originalY)
+        #apply scaling to image
+        self.image = pygame.transform.smoothscale(self.origionalImage,(zposx,zposy))
+        #apply scaling to hitbox
+        self.rect.width = zposx
+        self.rect.height = zposy
+
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.origionalImage = pygame.image.load(os.path.join('img', 'pointsBall.png'))
+        self.image = self.origionalImage
+        self.rect = self.image.get_rect()
+         
+        #set origional size for Z axis scaling effect.
+        self.originalX = self.rect.width
+        self.originalY = self.rect.height
+
+        #set direction vectors [random x/y]
+        self.vx = random.randint(-5,5)/10 #velocity X
+        self.vy = random.randint(-5,5)/10 #velocity Y
+        self.vz = 0.005
+
+        #set starting position
+        self.x = screenWidth/2 #position x
+        self.y = screenHeight/2 #position y
+        self.z = 0.1
+        self.rect.center = (self.x,self.y) #start at centre of window.
+
+        #set image to scale:
+        self.changeZ(self.z)    
     
+
+    def move(self):
+        #change x y z pos 
+        self.y = self.y + self.vy
+        self.x = self.x + self.vx
+        self.z = self.z + self.vz
+        self.rect.center = (self.x,self.y)
+        self.changeZ(self.z)
+
+        #remove the death ball from the screen if z > 1
+        if self.z > 1:
+            self.kill()    
+
+        
+class timeBall(pygame.sprite.Sprite): #class for the 'yellow' ball that SLOW the game upon touch.
+    def changeZ(self,zValue): #changes 'size' / distance away / z value of ball.
+        zposx = int(zValue*self.originalX)
+        zposy = int(zValue*self.originalY)
+        #apply scaling to image
+        self.image = pygame.transform.smoothscale(self.origionalImage,(zposx,zposy))
+        #apply scaling to hitbox
+        self.rect.width = zposx
+        self.rect.height = zposy
+
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.origionalImage = pygame.image.load(os.path.join('img', 'timeBall.png'))
+        self.image = self.origionalImage
+        self.rect = self.image.get_rect()
+         
+        #set origional size for Z axis scaling effect.
+        self.originalX = self.rect.width
+        self.originalY = self.rect.height
+
+        #set direction vectors [random x/y]
+        self.vx = random.randint(-5,5)/10 #velocity X
+        self.vy = random.randint(-5,5)/10 #velocity Y
+        self.vz = 0.005
+
+        #set starting position
+        self.x = screenWidth/2 #position x
+        self.y = screenHeight/2 #position y
+        self.z = 0.1
+        self.rect.center = (self.x,self.y) #start at centre of window.
+
+        #set image to scale:
+        self.changeZ(self.z)    
+    
+
+    def move(self):
+        #change x y z pos 
+        self.y = self.y + self.vy
+        self.x = self.x + self.vx
+        self.z = self.z + self.vz
+        self.rect.center = (self.x,self.y)
+        self.changeZ(self.z)
+
+        #remove the death ball from the screen if z > 1
+        if self.z > 1:
+            self.kill()  
+
+
 
 class ballMain(pygame.sprite.Sprite):
     def __init__(self):
