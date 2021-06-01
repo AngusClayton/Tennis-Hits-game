@@ -8,7 +8,7 @@ See [log.md](log.md) for development log.
 
 ![1](img/help/1.png)
 
-## User Feedback
+## User Feedback - Sam Fitzpatrick
 #### Good:
 * Simple Menu Interaction
 * Well designed menus
