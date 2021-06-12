@@ -2,6 +2,7 @@ from matplotlib.pyplot import title
 import pygame
 import os 
 import objects
+import highscore
 import random
 #setup
 size = (960,720)
@@ -58,7 +59,7 @@ while gameFinished == False: #main loop; change gameFinished when game is exited
                     NextSpawnTime = 3000
                 print("TitleScreen.next")
 
-        if True: #Change to false when not debuging the specialty balls
+        if False: #Change to false when not debuging the specialty balls
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_d:
                     deathBall = objects.deathBall()
@@ -142,7 +143,7 @@ while gameFinished == False: #main loop; change gameFinished when game is exited
         #display score:
         text = str(player.points)
         LargeText = pygame.font.Font('freesansbold.ttf',90)
-        TextSurf, TextRect = objects.text_object(text, LargeText)
+        TextSurf, TextRect = objects.text_object(text, LargeText,(0,0,0))
         TextRect.center = ((objects.screenWidth/2),50)
         screen.blit(TextSurf, TextRect)
 
@@ -181,5 +182,71 @@ while gameFinished == False: #main loop; change gameFinished when game is exited
     pygame.display.flip()
     clock.tick(60) #60fps
     #print(player.points)
+#========= Game Finished! 
+#determine if new high score:
+endScreen = objects.endScreen()
+menuObects.add(endScreen)
+newHighScore = False
+if highscore.retrieveHighScore()["score"] > player.points: 
+    #print(player.points,highscore.retrieveHighScore()["score"])
+    endScreen.newHighScore() #need new high score end screen
+    newHighScore = True
+
+
+nickname = str("edit name") #high score nickname
+
+# mouse position
+mouseX = 9999999999
+mouseY = 9999999999
+textInputColor = (0,0,0)
+
+gameOverActive = True
+while GameOverActive:
+    #===== show background and refresh screen + other basic pygame runtime stuff
+    screen.blit(bg, (0, 0))#background
+    menuObects.draw(screen)
+
+    #==== display HighScore
+    fontA = pygame.font.Font('freesansbold.ttf',69)
+    TextSurf, TextRect = objects.text_object(str(player.points), fontA,(0,0,0))
+    TextRect.center = (700,275)
+    screen.blit(TextSurf, TextRect)
+
+    
+    #=========New high score:
+    if newHighScore:
+        #print("NEW HIGIH SCORE")
+
+        #==== display nickname input field 
+        fontA = pygame.font.Font('freesansbold.ttf',69)
+        TextSurf, TextRect = objects.text_object(nickname, fontA,textInputColor)
+        TextRect.center = (630,357)
+        screen.blit(TextSurf, TextRect)
+        
+        for event in pygame.event.get():
+            #get mouse pos
+            if event.type == pygame.MOUSEMOTION:
+                mouseX = event.pos[0]
+                mouseY = event.pos[1]
+                #print(mouseX,mouseY)
+
+            #determine if mouse cursor over txt field [Values (336,391) to (903,319)]
+            if (336<mouseX<903) and (319<mouseY<391): #if mouse cursor over text field
+                #change color of text to #FFFFFF to show user that field is active
+                textInputColor = (255,255,255)
+                #change nickname text
+                if (event.type == pygame.TEXTINPUT) and len(nickname) < 9:
+                    nickname += event.text
+                if (event.type == pygame.KEYDOWN) and (event.key == pygame.K_BACKSPACE):
+                    nickname = nickname[:-1]
+            else:
+                textInputColor = (0,0,0)
+            
+
+
+
+    #=== update display
+    pygame.display.flip()
+    clock.tick(60)
 print(gameFinished,player.points)
 pygame.quit()

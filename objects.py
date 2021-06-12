@@ -38,6 +38,20 @@ class titleScreen(pygame.sprite.Sprite):
         else:
             self.kill()
             return True
+
+class endScreen(pygame.sprite.Sprite):
+    #end screen
+    def __init__(self):
+        pygame.sprite.Sprite.__init__(self)
+        self.images = []
+        self.images.append(pygame.image.load(os.path.join('img', 'gameOver.png'))) #
+        self.images.append(pygame.image.load(os.path.join('img', 'NewHighScore.png')))
+        self.image = self.images[0]
+        self.rect = self.image.get_rect()
+    def newHighScore(self):
+        self.image = self.images[1]
+    
+    
     
 class deathBall(pygame.sprite.Sprite): #class for the 'grey' ball that end the game upon touch.
     def changeZ(self,zValue): #changes 'size' / distance away / z value of ball.
@@ -281,6 +295,7 @@ class ballMain(pygame.sprite.Sprite):
             self.bounce()
 
 # ======== TEXT OBJECT
-def text_object(text,font):
-    textSurface = font.render(text,True,(0,0,0))
+def text_object(text,font,color):
+    textSurface = font.render(text,True,color)
     return textSurface, textSurface.get_rect()
+
