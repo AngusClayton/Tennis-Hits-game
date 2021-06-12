@@ -1,8 +1,15 @@
-# Stack overflow article helped with the Z scaling
-https://stackoverflow.com/questions/43046376/how-to-change-an-image-size-in-pygame
+# GitHub repository link:
+
+https://github.com/Happypig123123/Tennis-Hits-game
+
+# Stack overflow account link:
+
+https://stackoverflow.com/users/11463378/angusclayto
+
+
 
 # Useful website on adding text to pygame
-https://pythonprogramming.net/displaying-text-pygame-screen/
+
 
 ## Game Idea 1 [4hrs]
 
@@ -65,6 +72,16 @@ The purple and grey balls are quite self explanatory in documentation above.
 
 The time ball works by reducing the Z velocity of the ball to 75% of its original value.  This allows the player to have more time to get the timing on the main ball correct.
 
+### 3D effect
+
+The game relies on a pseudo 3D effect, changing the size of objects as the become closer/further away. This following website helped:
+
+https://stackoverflow.com/questions/43046376/how-to-change-an-image-size-in-pygame
+
+
+
+### Game difficulty / Timing 
+
 ![Dificulty Over Time time Bomb](documentationImagery/Dificulty Over Time [Time Bomb].png)
 
 In the **above graph** you can see the the time bomb slows down the rate Z velocity. Unlike in the **graph below** where no time bombs were used, and the game becomes 'impossible' after 40,000ms. 
@@ -122,6 +139,12 @@ For testing purposes; the balls were initially triggered by key presses; but are
                 ballObjects.add(timeBall)
 ```
 
+## Added point score
+
+https://pythonprogramming.net/displaying-text-pygame-screen/
+
+This website helped with adding text to the screen, as well as tutorials. 
+
 ## To Do [As of 31/5/21]
 
 - Add end screen
@@ -174,7 +197,7 @@ Added game over screen, has two 'screens'; one for when you get beat high score,
 - Improve help screen looks
 - Add 'tooltips' when user dies; telling them why and what they can do to improve
 
-# 12/5/2021 [2Hrs]
+# 12/5/2021 [4Hrs]
 
 #### Added help message.
 
@@ -189,4 +212,62 @@ Made pygame text fonts **ERASBD.ttf** to match static text.
 #### Change in Active Specialty balls. 
 
 From user feedback; found that if you leave racket in middle; it will hit the specialty balls before user had time to register they were there. Now made it so that specialty ball z has to be greater than 10%.
+
+#### Data Dictionary Complete
+
+The data dictionary was completed. As there are many variables; I wrote some code to automate the process.
+
+The first part below creates a 'script' to test all the data types.
+
+```python
+program = """ STRING CONTAINING ALL CODE! """
+varibles = {}
+program = program.split("\n") #Split into array of liens
+for i in program: #loop throough lines
+    i = i.strip()
+    if (" = " in i) and i[0] != '#':
+        
+        x = i.split(" = ")
+        if x[0] not in varibles:
+            varibles.update({x[0]:x[1]})
+
+for i in varibles:
+    print("try:")
+    print("    print('"+i+"',type("+i+"))")
+    print("except:")
+    print("    print('error",i,"')")
+
+        
+```
+
+It produces output such as:
+
+```python3
+try:
+    print('size',":",type(size))
+except:
+    print('error size ')
+try:
+    print('screen',":",type(screen))
+except:
+    print('error screen ')
+try:
+    print('gameIcon',":",type(gameIcon))
+except:
+    print('error gameIcon ')
+```
+
+This output is then ran at the bottom of the main.py program, outputting the datatype for each variable. Now I only have to add the description for 45+ variables instead of name and type manually.
+
+
+
+The data dictionary is **complete** for all python files (main.py, objects.py, highscore.py)
+
+#### Story Board.
+
+The story board was finalized during the creation of the last 'screen' options *game over screens.*
+
+It showcases the flow between different screens in the application, from main menu sequence, to gameplay, to game over.
+
+#### 
 
