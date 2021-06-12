@@ -4,7 +4,7 @@ https://stackoverflow.com/questions/43046376/how-to-change-an-image-size-in-pyga
 # Useful website on adding text to pygame
 https://pythonprogramming.net/displaying-text-pygame-screen/
 
-## Game Idea 1
+## Game Idea 1 [4hrs]
 
 # 16/5/2021
 
@@ -26,7 +26,7 @@ At this stage game needs:
 
 
 
-## Game Idea 2
+## Game Idea 2 [3.5hrs]
 Decided that the gravity flip game was too basic; so have decided to make a tennis game.
 There will be four balls:
 
@@ -57,7 +57,7 @@ Completed the game design.
 Completed the game graphics.
 Implemented the main ball code, player racket and help/start sequence.
 
-## 31/5/2021
+## 31/5/2021 [2hrs]
 
 Implemented the specialty balls.
 
@@ -174,7 +174,7 @@ Added game over screen, has two 'screens'; one for when you get beat high score,
 - Improve help screen looks
 - Add 'tooltips' when user dies; telling them why and what they can do to improve
 
-# 12/5/2021
+# 12/5/2021 [2Hrs]
 
 #### Added help message.
 
