@@ -7,6 +7,11 @@ import random
 #setup
 size = (960,720)
 screen = pygame.display.set_mode(size)
+
+gameIcon = pygame.image.load(os.path.join("img","icon.png"))
+pygame.display.set_icon(gameIcon)
+
+
 pygame.display.set_caption("Tennis Hits")
 pygame.init()
 #clock setup
@@ -126,14 +131,21 @@ while gameFinished == False: #main loop; change gameFinished when game is exited
             #now check active speciality ballObjects collisions
             #we require the activeSpecialBalls dictionary to stop 'undefined' errors when these balls are not currenty active/exist.
             #the code after the and statement will not run unless the first condition is true; therefore this prevents undefinded errors in the collision check.
+            minZCollision = 0.2
+            
             if activeSpecialBalls["DEATH"] and deathBall in collisions:
-                gameFinished = "Next time don't hit the grey ball. It instantly ends the game." #end game
+                if deathBall.z > minZCollision:
+                    gameFinished = "Next time don't hit the grey ball. It instantly ends the game." #end game
+                
             if activeSpecialBalls["BONUS"] and bonusBall in collisions:
-                player.points += 5
-                bonusBall.z = 2 #causes the ball to 'die' as ball will kill its self when z > 1
+                if bonusBall.z > minZCollision:
+                    player.points += 5
+                    bonusBall.z = 2 #causes the ball to 'die' as ball will kill its self when z > 1
+                    
             if activeSpecialBalls["TIME"] and timeBall in collisions:
-                mainBall.vz *= .75 #reduce the main ball's velocity to 75% of its current value
-                timeBall.z = 2 #causes the ball to 'die' as ball will kill its self when z > 1
+                if timeBall.z > minZCollision:
+                    mainBall.vz *= .75 #reduce the main ball's z speed to 75% of its current value
+                    timeBall.z = 2 #causes the ball to 'die' as ball will kill its self when z > 1
 
                 
         
