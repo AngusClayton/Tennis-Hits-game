@@ -269,5 +269,12 @@ The story board was finalized during the creation of the last 'screen' options *
 
 It showcases the flow between different screens in the application, from main menu sequence, to gameplay, to game over.
 
-#### 
+## To do 12/06/2021
+
+- Add Gannt chart excel document to the documentation word document.
+- Add GitHub commits to log book!
+- Ensure files are organised. 
+- Do some final user testing.
+- Write maintenance and future considerations plan.
+- Evaluate success with design specifications
 
