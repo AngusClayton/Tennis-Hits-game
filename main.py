@@ -13,6 +13,8 @@ pygame.init()
 clock = pygame.time.Clock()
 
 gameFinished = False
+gameOverActive = True
+
 #set background
 bg = pygame.image.load(os.path.join("img","background.png"))
 
@@ -52,6 +54,7 @@ while gameFinished == False: #main loop; change gameFinished when game is exited
         #print(event)
         if event.type == pygame.QUIT:
             gameFinished = True
+            gameOverActive = False
         if event.type == pygame.MOUSEBUTTONDOWN: #when key pressed:
             if event.button == 1 and not gameStarted: #left click:
                 gameStarted = titleSequence.nextImage()
@@ -124,7 +127,7 @@ while gameFinished == False: #main loop; change gameFinished when game is exited
             #we require the activeSpecialBalls dictionary to stop 'undefined' errors when these balls are not currenty active/exist.
             #the code after the and statement will not run unless the first condition is true; therefore this prevents undefinded errors in the collision check.
             if activeSpecialBalls["DEATH"] and deathBall in collisions:
-                gameFinished = "DEATH_BALL" #end game
+                gameFinished = "Next time don't hit the grey ball. It instantly ends the game." #end game
             if activeSpecialBalls["BONUS"] and bonusBall in collisions:
                 player.points += 5
                 bonusBall.z = 2 #causes the ball to 'die' as ball will kill its self when z > 1
@@ -137,12 +140,12 @@ while gameFinished == False: #main loop; change gameFinished when game is exited
 
         #check if  game over due to mainball traveling past z=1
         if mainBall.gameOver:
-            gameFinished = "BALL_PAST_PLAYER"
+            gameFinished = "You need to hit the green ball faster after it changes from red."
         
         
         #display score:
         text = str(player.points)
-        LargeText = pygame.font.Font('freesansbold.ttf',90)
+        LargeText = pygame.font.Font('ERASBD.ttf',90)
         TextSurf, TextRect = objects.text_object(text, LargeText,(0,0,0))
         TextRect.center = ((objects.screenWidth/2),50)
         screen.blit(TextSurf, TextRect)
@@ -187,7 +190,7 @@ while gameFinished == False: #main loop; change gameFinished when game is exited
 endScreen = objects.endScreen()
 menuObects.add(endScreen)
 newHighScore = False
-if highscore.retrieveHighScore()["score"] > player.points: 
+if highscore.retrieveHighScore()["score"] < player.points: 
     #print(player.points,highscore.retrieveHighScore()["score"])
     endScreen.newHighScore() #need new high score end screen
     newHighScore = True
@@ -200,30 +203,52 @@ mouseX = 9999999999
 mouseY = 9999999999
 textInputColor = (0,0,0)
 
-gameOverActive = True
-while GameOverActive:
+#=== constant varibles:
+currentHighScore = highscore.retrieveHighScore()
+scorePositionGameOver = (None,None)
+#set score position game over:
+if newHighScore:
+    
+    scorePositionGameOver = (615,275)
+else:
+    scorePositionGameOver = (465,218)
+
+
+fontA = pygame.font.Font('ERASBD.ttf',69)
+helpFont = pygame.font.Font('ERASBD.ttf',25)
+
+
+while gameOverActive:
     #===== show background and refresh screen + other basic pygame runtime stuff
     screen.blit(bg, (0, 0))#background
     menuObects.draw(screen)
 
-    #==== display HighScore
-    fontA = pygame.font.Font('freesansbold.ttf',69)
+    #==== display Score
+    
     TextSurf, TextRect = objects.text_object(str(player.points), fontA,(0,0,0))
-    TextRect.center = (700,275)
+    TextRect.midleft = scorePositionGameOver
+    screen.blit(TextSurf, TextRect)
+
+    #=== display help tip
+    TextSurf, TextRect = objects.text_object("Hint: " + str(gameFinished), helpFont,(0,0,0))
+    TextRect.midleft = (20,700)
     screen.blit(TextSurf, TextRect)
 
     
-    #=========New high score:
+    
+    #=========New high score screen code:
     if newHighScore:
         #print("NEW HIGIH SCORE")
 
         #==== display nickname input field 
-        fontA = pygame.font.Font('freesansbold.ttf',69)
+        
         TextSurf, TextRect = objects.text_object(nickname, fontA,textInputColor)
-        TextRect.center = (630,357)
+        TextRect.midleft = (350,357)
         screen.blit(TextSurf, TextRect)
         
         for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                gameOverActive = False
             #get mouse pos
             if event.type == pygame.MOUSEMOTION:
                 mouseX = event.pos[0]
@@ -242,11 +267,47 @@ while GameOverActive:
             else:
                 textInputColor = (0,0,0)
             
+            #see if mouse on save and button:
+            if (482 < mouseX < 942) and (564<mouseY<679):
+                if (event.type == pygame.MOUSEBUTTONDOWN) and (event.button == 1):
+                    gameOverActive = False
+
+    else: #regular game over screen
+
+        # === interactrve element (exit button)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                gameOverActive = False
+            #get mouse pos
+            if event.type == pygame.MOUSEMOTION:
+                mouseX = event.pos[0]
+                mouseY = event.pos[1]
+                #print(mouseX,mouseY)
+
+            #see if mouse on exit button:
+            if (647 < mouseX < 942) and (564<mouseY<679):
+                if (event.type == pygame.MOUSEBUTTONDOWN) and (event.button == 1):
+                    gameOverActive = False  
+
+        # === highscore display:
+        TextSurf, TextRect = objects.text_object(str(currentHighScore["score"]), fontA,(0,0,0))
+        TextRect.midleft = (465,365)
+        screen.blit(TextSurf, TextRect)
+
+        TextSurf, TextRect = objects.text_object(str(currentHighScore["player"]), fontA,(0,0,0))
+        TextRect.midleft = (465,445)
+        screen.blit(TextSurf, TextRect)
+            
 
 
 
     #=== update display
     pygame.display.flip()
     clock.tick(60)
+
+#== save score:
+if newHighScore:
+    highscore.newScore(nickname,player.points)
+    highscore.save()
 print(gameFinished,player.points)
 pygame.quit()

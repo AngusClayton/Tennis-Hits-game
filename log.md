@@ -134,7 +134,7 @@ For testing purposes; the balls were initially triggered by key presses; but are
 
 ## Font choice:
 
-ERAS DEMI ITC **for static text as of 11/6/2021; pygame dynamic text is all <u>Free and open sans</u>**
+**ERAS DEMI ITC** for static text as of 11/6/2021; pygame dynamic text is all <u>Free and open sans</u>
 
 
 
@@ -169,6 +169,24 @@ Added game over screen, has two 'screens'; one for when you get beat high score,
 ## To Do: As of 11/6/21
 
 - Finish Game over screen.
+  - Make the exit button exit; and save button save highscore
 - Finalise documentation
 - Improve help screen looks
 - Add 'tooltips' when user dies; telling them why and what they can do to improve
+
+# 12/5/2021
+
+#### Added help message.
+
+Help message appears when the user 'dies'; informing them how to do better next-time.
+
+#### Finalized game over screen.
+
+Exit buttons work; high score information displaying correctly.
+
+Made pygame text fonts **ERASBD.ttf** to match static text.
+
+#### Change in Active Specialty balls. [YET TO BE IMPLIMENTED]
+
+From user feedback; found that if you leave racket in middle; it will hit the specialty balls before user had time to register they were there. Now made it so that specialty ball z has to be greater than 10%.
+
