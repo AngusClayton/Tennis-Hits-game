@@ -209,7 +209,7 @@ Exit buttons work; high score information displaying correctly.
 
 Made pygame text fonts **ERASBD.ttf** to match static text.
 
-#### Change in Active Specialty balls. 
+#### Change in Active Specialty balls. [From Sam's user feedback.]
 
 From user feedback; found that if you leave racket in middle; it will hit the specialty balls before user had time to register they were there. Now made it so that specialty ball z has to be greater than 10%.
 
@@ -277,4 +277,29 @@ It showcases the flow between different screens in the application, from main me
 - Do some final user testing.
 - Write maintenance and future considerations plan.
 - Evaluate success with design specifications
+- write about use of IDE
+
+# 13/6/2021 [20min]
+
+Completed future considerations and maintenance plan.
+
+Finished Evaluation.
+
+Added user testing from Sam. ***Still need more user feedback from others.***
+
+## Addressing User feedback
+
+The problems with hit box size have been addressed, the `changeZ()`function was not changing the death balls hitbox or `rect`, causing size of hitbox to be different from visual size.
+
+The balls no-longer end the game if they spawn under the users racket; as the size of the ball must satisfy `z>20%` for collisions to be enabled. 
+
+I am planning to make the points indicator change colour to show that a bonus / time ball has been activated. 
+
+Also am planning to add music.
+
+Not planning to add pause menu at this stage due to time constraints, however have included this in future considerations.
+
+
+
+
 
