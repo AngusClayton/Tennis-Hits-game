@@ -25,9 +25,15 @@ clock = pygame.time.Clock()
 gameFinished = False
 gameOverActive = True
 
-#set background
+#set background:
 bg = pygame.image.load(os.path.join("img","background.png"))
 
+#set backing music:
+try:
+    pygame.mixer.music.load('dioma.mp3') #Jnathyn - Dioma [NCS Release] #14/6/2021
+    pygame.mixer.music.play(-1, 0.0)
+except:
+    print("ERROR: PYGAME MUSIC NOT INSTALLED CORRECTLY ON SYSTEM")
 #menu object list:
 menuObects = pygame.sprite.Group()
 

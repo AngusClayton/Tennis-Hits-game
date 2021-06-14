@@ -222,7 +222,7 @@ class ballMain(pygame.sprite.Sprite):
         self.z = 0.1
         self.rect.center = (self.x,self.y) #start at centre of window.
         #set ready state (if collision when ball not ready take a point)
-        self.ready = False
+        self.ready = True
 
         #Set game over (As if the ball moves too far in the Z axis (>1) the player has missed.)
         self.gameOver = False
