@@ -33,7 +33,7 @@ At this stage game needs:
 
 
 
-## Game Idea 2 [3.5hrs]
+## Game Idea 2 [4hrs] 30/5/2021
 Decided that the gravity flip game was too basic; so have decided to make a tennis game.
 There will be four balls:
 
@@ -60,7 +60,7 @@ The *grey ball* end the game when the user touches it; it is sort of a 'bomb' ba
 ![Main Ball](img/deathBall.png)
 
 ### Features added as of 30/5/2021:
-Completed the game design.
+Completed rough game design (story board).
 Completed the game graphics.
 Implemented the main ball code, player racket and help/start sequence.
 
@@ -265,7 +265,7 @@ The data dictionary is **complete** for all python files (main.py, objects.py, h
 
 #### Story Board.
 
-The story board was finalized during the creation of the last 'screen' options *game over screens.*
+The story board was finalized as some modifications need for the creation of the last 'screen' options *game over screens.*
 
 It showcases the flow between different screens in the application, from main menu sequence, to gameplay, to game over.
 
@@ -301,5 +301,54 @@ Not planning to add pause menu at this stage due to time constraints, however ha
 
 
 
+# GITHUB COMMIT LOG:
 
+Latest to oldest order:
+
+### Commits on Jun 13, 2021
+
+    Documentation 
+
+### Commits on Jun 12, 2021
+
+	Update Log.md 
+
+
+	added events to log that i forgot to add
+	
+	some file management
+
+
+	Active Specialty Balls now don't register collisions at low Z values.…
+
+
+
+	Finalized game over.
+	
+	Highscore + Game Over screen
+
+### Commits on Jun 1, 2021
+
+	Update README.md
+	Merge pull request #1 from Silveridge/patch-1
+		(Sam's User Feedback)
+	
+	User Feedback @Silveridge
+
+### Commits on May 31, 2021
+
+	Update log.md
+	 
+	Implemented the specialty balls.
+
+### Commits on May 30, 2021	
+
+
+	Update README.md
+	
+	Updated README to incl link to log.md
+	
+	Added basic files
+	
+	Initial commit 
 
