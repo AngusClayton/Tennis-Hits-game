@@ -1,3 +1,7 @@
+#Angus Clayton 2021
+#12SDD ATK3
+#Tennis Hits game
+#highscore DB interface module.
 import json
 filename = "highscoreDB.json"
 #--- load high scores:

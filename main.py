@@ -1,4 +1,9 @@
-from matplotlib.pyplot import title
+#Angus Clayton 2021
+#12SDD ATK3
+#Tennis Hits game
+#main program.
+
+from matplotlib.pyplot import title #not sure why I added this, but don't want to remove incase it breakes anything
 import pygame
 import os 
 import objects

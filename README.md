@@ -8,19 +8,21 @@ See [log.md](log.md) for development log.
 
 ![1](img/help/1.png)
 
-## User Feedback - Sam Fitzpatrick
-#### Good:
-* Simple Menu Interaction
-* Well designed menus
-* Minimal bugs in actual gameplay
-* Clean Interface
-* Well-executed idea
+# How to run game:
 
-#### Improvements:
-* Blackball/Tennis racket hit-box is bigger than sprite image
-* No end screen, game just closes
-* No pause menu
-* No indicator for lost points/gained points
-* No obvious indicator that gold ball does not slow down time
-* Red ball spawning on tennis racquet causes lost points without giving user enough time to react (consider adding a countdown)
-* Sounds/Music would be cool
+#### Dependencies:
+
+Python3
+
+Pygame
+
+
+
+#### Starting Game:
+
+ensure you are in the working directory with `main.py`, and its accompanying files.
+
+Run the following:
+
+`python3 main.py`
+
