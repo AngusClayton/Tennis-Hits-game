@@ -324,6 +324,11 @@ Thanks. Have tried installing .ddl manually into sys32
 
 ----
 
+## Made text input more obvious
+In response to user feedback, made text input box more obvious; and acts like a typical text input box. 
+## Implementation of points colour
+In response to user feedback,
+makes it obvious that the game has registered a point loss or gain. Also makes it obvious when you hit a time bomb or bonus ball that something happened.
 
 
 # GITHUB COMMIT LOG:
