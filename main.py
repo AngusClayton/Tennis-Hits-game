@@ -19,6 +19,7 @@ pygame.display.set_icon(gameIcon)
 
 pygame.display.set_caption("Tennis Hits")
 pygame.init()
+pygame.mixer.init() #Initalises mixer, duh
 #clock setup
 clock = pygame.time.Clock()
 
