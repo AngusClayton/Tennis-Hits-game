@@ -3,7 +3,7 @@
 #Tennis Hits game
 #main program.
 
-from matplotlib.pyplot import title #not sure why I added this, but don't want to remove incase it breakes anything
+#from matplotlib.pyplot import title #not sure why I added this, but don't want to remove incase it breakes anything
 import pygame
 import os 
 import objects
@@ -19,6 +19,11 @@ pygame.display.set_icon(gameIcon)
 
 pygame.display.set_caption("Tennis Hits")
 pygame.init()
+
+#point color
+pointColor = (0,0,0)
+pointColorTime = 0
+pointColorChangeDuration = 500
 #clock setup
 clock = pygame.time.Clock()
 
@@ -29,9 +34,6 @@ gameOverActive = True
 bg = pygame.image.load(os.path.join("img","background.png"))
 
 #set backing music:
-#Note: try except used; as on my windows system; (which i devloped on) the music would not play (I believe my python install has path errors) however my macOS laptop had no problem
-#still wanted to have music; but didn't have time to fix my python installation on PC.
-#tested macbook as off 15/6/2021
 try:
     pygame.mixer.init()
     pygame.mixer.music.load('dioma.mp3') #Jnathyn - Dioma [NCS Release] #14/6/2021
@@ -106,6 +108,13 @@ while gameFinished == False: #main loop; change gameFinished when game is exited
     menuObects.draw(screen)
 
     if gameStarted: # === code to run when game is started; and not on a start menu screen.
+        #set points color back after a sec
+        if pointColorTime < pygame.time.get_ticks():
+            pointColor = (0,0,0)
+
+
+
+
         ballObjects.draw(screen) #draw the main ball
         playerObjects.draw(screen) #draw the player racket.
         #======= movement of ball objects [handles physics]
@@ -138,10 +147,14 @@ while gameFinished == False: #main loop; change gameFinished when game is exited
                     mainBall.impactEnabled = False
                     mainBall.ready=False
                     player.points += 1
+                    pointColor = (0,255,0) #added 15/6 - changes point color when stuff happens
+                    pointColorTime = pygame.time.get_ticks() + pointColorChangeDuration
                 else:
                     if not hitWhenNotReady and mainBall.vz > 0: #only takes 1 point; and only if ball heading towards player
                         hitWhenNotReady = True
                         player.points -= 1
+                        pointColor = (255,0,0)#added 15/6 - changes point color when stuff happens
+                        pointColorTime = pygame.time.get_ticks()+ pointColorChangeDuration
             
             #now check active speciality ballObjects collisions
             #we require the activeSpecialBalls dictionary to stop 'undefined' errors when these balls are not currenty active/exist.
@@ -156,12 +169,15 @@ while gameFinished == False: #main loop; change gameFinished when game is exited
                 if bonusBall.z > minZCollision:
                     player.points += 5
                     bonusBall.z = 2 #causes the ball to 'die' as ball will kill its self when z > 1
-                    
+                    pointColor = (200,100,200)#added 15/6 - changes point color when stuff happens
+                    pointColorTime = pygame.time.get_ticks()+ pointColorChangeDuration
+
             if activeSpecialBalls["TIME"] and timeBall in collisions:
                 if timeBall.z > minZCollision:
                     mainBall.vz *= .75 #reduce the main ball's z speed to 75% of its current value
                     timeBall.z = 2 #causes the ball to 'die' as ball will kill its self when z > 1
-
+                    pointColor = (255,255,80)#added 15/6 - changes point color when stuff happens
+                    pointColorTime = pygame.time.get_ticks()+ pointColorChangeDuration
                 
         
 
@@ -171,9 +187,10 @@ while gameFinished == False: #main loop; change gameFinished when game is exited
         
         
         #display score:
+        
         text = str(player.points)
         LargeText = pygame.font.Font('ERASBD.ttf',90)
-        TextSurf, TextRect = objects.text_object(text, LargeText,(0,0,0))
+        TextSurf, TextRect = objects.text_object(text, LargeText,pointColor)
         TextRect.center = ((objects.screenWidth/2),50)
         screen.blit(TextSurf, TextRect)
 
@@ -244,6 +261,7 @@ else:
 fontA = pygame.font.Font('ERASBD.ttf',69)
 helpFont = pygame.font.Font('ERASBD.ttf',25)
 
+textActive = False
 
 while gameOverActive:
     #===== show background and refresh screen + other basic pygame runtime stuff
@@ -281,13 +299,19 @@ while gameOverActive:
                 mouseX = event.pos[0]
                 mouseY = event.pos[1]
                 #print(mouseX,mouseY)
+            
+            #=== determine if user has clicked on text field. (aciv)
+            if (event.type == pygame.MOUSEBUTTONDOWN) and (event.button == 1):
 
-            #determine if mouse cursor over txt field [Values (336,391) to (903,319)]
-            if (336<mouseX<903) and (319<mouseY<391): #if mouse cursor over text field
-                #change color of text to #FFFFFF to show user that field is active
+                if (336<mouseX<903) and (319<mouseY<391): #if mouse cursor over text field
+                    textActive = True
+                    #change color of text to #FFFFFF to show user that field is active
+                else:
+                    textActive = False
+            if textActive:
                 textInputColor = (255,255,255)
                 #change nickname text
-                if (event.type == pygame.TEXTINPUT) and len(nickname) < 9:
+                if (event.type == pygame.TEXTINPUT) and len(nickname) < 12:
                     nickname += event.text
                 if (event.type == pygame.KEYDOWN) and (event.key == pygame.K_BACKSPACE):
                     nickname = nickname[:-1]
