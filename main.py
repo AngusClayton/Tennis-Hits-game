@@ -29,6 +29,9 @@ gameOverActive = True
 bg = pygame.image.load(os.path.join("img","background.png"))
 
 #set backing music:
+#Note: try except used; as on my windows system; (which i devloped on) the music would not play (I believe my python install has path errors) however my macOS laptop had no problem
+#still wanted to have music; but didn't have time to fix my python installation on PC.
+#tested macbook as off 15/6/2021
 try:
     pygame.mixer.init()
     pygame.mixer.music.load('dioma.mp3') #Jnathyn - Dioma [NCS Release] #14/6/2021
