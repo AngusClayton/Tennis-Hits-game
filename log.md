@@ -299,6 +299,31 @@ Also am planning to add music.
 
 Not planning to add pause menu at this stage due to time constraints, however have included this in future considerations.
 
+# 15/5/2021 [20min]
+
+Tried to add music, but pygame errors. Asked question on stack overflow.
+
+https://stackoverflow.com/questions/67982927/cannot-play-music-pygame-win-10
+
+#### Question:
+
+Hi when trying to play music in pygame; my win10 machine gives this error:
+here is code snippet:
+```
+    pygame.mixer.music.load('dioma.mp3') #Jnathyn - Dioma [NCS Release] #14/6/2021
+    pygame.mixer.music.play(-1, 0.0)
+```
+here is error snippet:
+```
+Traceback (most recent call last):
+  File ".\main.py", line 33, in <module>
+    pygame.mixer.music.load('dioma.mp3') #Jnathyn - Dioma [NCS Release] #14/6/2021
+pygame.error: Failed loading libmpg123-0.dll: The specified module could not be found.
+```
+Thanks. Have tried installing .ddl manually into sys32
+
+----
+
 
 
 # GITHUB COMMIT LOG:

@@ -30,6 +30,7 @@ bg = pygame.image.load(os.path.join("img","background.png"))
 
 #set backing music:
 try:
+    pygame.mixer.init()
     pygame.mixer.music.load('dioma.mp3') #Jnathyn - Dioma [NCS Release] #14/6/2021
     pygame.mixer.music.play(-1, 0.0)
 except:
